@@ -1,0 +1,132 @@
+:root {
+    --bs-primary: #0056b3;
+    --bs-primary-rgb: 0, 86, 179;
+    --bs-secondary: #6c757d;
+    --bs-success: #24C04E;
+    --bs-stars: #e9c458;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/main.png') center/cover no-repeat;
+    color: white;
+    padding: 170px 0 100px;
+}
+
+.file-upload {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-upload:hover {
+    border-color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+.service-card {
+    height: 100%;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+.advantage-icon-star {
+    font-size: 2.5rem;
+    color: var(--bs-stars);
+    margin-bottom: 1rem;
+}
+
+.advantage-icon-user {
+    font-size: 4rem;
+    color: var(--bs-secondary);
+    margin-bottom: 1rem;
+}
+
+.contact-map {
+    background: #f8f9fa;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.bg-light-custom {
+    background-color: #f8f9fa !important;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    z-index: 1000;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#back-to-top:hover {
+    transform: scale(1.1);
+}
+
+.arrow-up-icon {
+    font-size: 3rem;
+    color: var(--bs-primary);
+    border-radius: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: block;
+    line-height: 1;
+    overflow: hidden;
+}
+
+
+footer {
+    background-color: #212529;
+}
+
+.image-logo {
+    height: 50px;
+    width: auto;
+    padding-bottom: 5px;
+}
+
+.sucses {
+    color: #24C04E;
+}
+
+.text-navabar {
+    color: #D4D4D4;
+}
+
+.text-navabar:hover {
+    color: #979797;
+}
+
+.filters {
+    backdrop-filter: blur(3px);
+}
