@@ -1,3 +1,5 @@
+
+@import "tailwindcss";
 :root {
     --bs-primary: #0056b3;
     --bs-primary-rgb: 0, 86, 179;
@@ -129,4 +131,72 @@ footer {
 
 .filters {
     backdrop-filter: blur(3px);
+}
+/* Feedback Carousel Styles */
+.feedback-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 10px;
+    text-align: center;
+}
+
+.feedback-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--bs-primary);
+}
+
+.feedback-rating {
+    color: var(--bs-stars);
+    margin-bottom: 0.5rem;
+}
+
+/* Carousel controls custom */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--bs-primary);
+    border-radius: 50%;
+    padding: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+}
+
+.carousel-control-prev-icon::after,
+.carousel-control-next-icon::after {
+    display: none;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 120px 0 60px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+    
+    .advantage-icon {
+        font-size: 2.5rem;
+    }
 }
