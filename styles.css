@@ -83,7 +83,7 @@ section {
 /* Анимация для кнопки "Наверх" */
 #back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 30px;   
     right: 30px;
     z-index: 1000;
     text-decoration: none;
@@ -209,4 +209,57 @@ footer {
 
 .hover-text-primary:hover {
     color: var(--bs-primary) !important;
+}
+/* Стили для модального окна отзыва */
+.rating-select .form-check {
+    padding-left: 0;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.rating-select .form-check-input {
+    margin-right: 5px;
+    margin-top: 0;
+}
+
+.rating-select .form-check-label {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.rating-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+/* Адаптивность для модального окна */
+.modal-content {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+/* Для маленьких экранов */
+@media (max-width: 576px) {
+    .rating-select {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .rating-select .form-check {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
 }
