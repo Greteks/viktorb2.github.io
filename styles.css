@@ -83,7 +83,7 @@ section {
 /* Анимация для кнопки "Наверх" */
 #back-to-top {
     position: fixed;
-    bottom: 30px;   
+    bottom: 30px;
     right: 30px;
     z-index: 1000;
     text-decoration: none;
@@ -119,7 +119,6 @@ section {
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     color: #004494;
 }
-
 
 footer {
     background-color: #212529;
@@ -194,33 +193,19 @@ footer {
     transform: translateY(0);
 }
 
-/* Стили для модального окна отзыва */
-.rating-select .form-check {
-    padding-left: 0;
-}
-
-.rating-select .form-check-input {
-    margin-right: 5px;
-}
-
-.hover-bg-light:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-.hover-text-primary:hover {
-    color: var(--bs-primary) !important;
-}
-/* Стили для модального окна отзыва */
+/* Стили для модального окна отзыва (КОРРЕКТНЫЕ) */
 .rating-select .form-check {
     padding-left: 0;
     margin-right: 15px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .rating-select .form-check-input {
     margin-right: 5px;
     margin-top: 0;
+    flex-shrink: 0;
 }
 
 .rating-select .form-check-label {
@@ -234,6 +219,14 @@ footer {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-start;
+}
+
+.hover-bg-light:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.hover-text-primary:hover {
+    color: var(--bs-primary) !important;
 }
 
 /* Адаптивность для модального окна */
