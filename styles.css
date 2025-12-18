@@ -1,5 +1,3 @@
-
-@import "tailwindcss";
 :root {
     --bs-primary: #0056b3;
     --bs-primary-rgb: 0, 86, 179;
@@ -106,7 +104,6 @@ section {
     overflow: hidden;
 }
 
-
 footer {
     background-color: #212529;
 }
@@ -132,7 +129,8 @@ footer {
 .filters {
     backdrop-filter: blur(3px);
 }
-/* Feedback Carousel Styles */
+
+/* Стили для карусели отзывов */
 .feedback-card {
     background: #fff;
     border-radius: 10px;
@@ -156,7 +154,7 @@ footer {
     margin-bottom: 0.5rem;
 }
 
-/* Carousel controls custom */
+/* Кастомизация контролов карусели */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: var(--bs-primary);
@@ -167,11 +165,7 @@ footer {
     background-size: 1.25rem;
 }
 
-.carousel-control-prev-icon::after,
-.carousel-control-next-icon::after {
-    display: none;
-}
-
+/* Анимация появления */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -182,21 +176,20 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
-/* Адаптивность */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 120px 0 60px;
-    }
-    
-    .hero-section h1 {
-        font-size: 2.5rem;
-    }
-    
-    section {
-        padding: 60px 0;
-    }
-    
-    .advantage-icon {
-        font-size: 2.5rem;
-    }
+
+/* Стили для модального окна отзыва */
+.rating-select .form-check {
+    padding-left: 0;
+}
+
+.rating-select .form-check-input {
+    margin-right: 5px;
+}
+
+.hover-bg-light:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.hover-text-primary:hover {
+    color: var(--bs-primary) !important;
 }
