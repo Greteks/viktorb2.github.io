@@ -80,18 +80,27 @@ section {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Анимация для кнопки "Наверх" */
 #back-to-top {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    display: none;
     z-index: 1000;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 #back-to-top:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(0);
 }
 
 .arrow-up-icon {
@@ -102,7 +111,15 @@ section {
     display: block;
     line-height: 1;
     overflow: hidden;
+    background: white;
+    transition: all 0.3s ease;
 }
+
+.arrow-up-icon:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    color: #004494;
+}
+
 
 footer {
     background-color: #212529;

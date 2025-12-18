@@ -8,9 +8,9 @@ window.onscroll = function() {
 
 function scrollFunction() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        backToTopButton.style.display = "block";
+        backToTopButton.classList.add('show');
     } else {
-        backToTopButton.style.display = "none";
+        backToTopButton.classList.remove('show');
     }
 }
 
