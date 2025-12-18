@@ -32,39 +32,79 @@ function setupBackToTop() {
     });
 }
 
-// Валидация форм
-function setupForms() {
-    // Форма заявки
-    const applicationForm = document.getElementById('applicationForm');
-    if (applicationForm) {
-        applicationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!applicationForm.checkValidity()) {
-                e.stopPropagation();
-            } else {
-                alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 24 часов.');
-                applicationForm.reset();
-                document.getElementById('fileList').innerHTML = '';
-            }
-            
-            applicationForm.classList.add('was-validated');
-        }, false);
-    }
-    
-    // Форма отзыва
+// ВАЖНО: Обработка формы отзыва в модальном окне
+function setupFeedbackForm() {
     const feedbackForm = document.getElementById('feedbackForm');
-    if (feedbackForm) {
-        feedbackForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    const feedbackModal = document.getElementById('feedbackModal');
+    
+    if (!feedbackForm) return;
+    
+    feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Получаем данные из формы
+        const name = document.getElementById('feedbackName').value.trim();
+        const text = document.getElementById('feedbackText').value.trim();
+        const rating = document.querySelector('input[name="rating"]:checked')?.value || '5';
+        const avatarLink = document.querySelector('#feedbackForm input[type="text"]')?.value.trim() || '';
+        
+        // Проверяем заполненность
+        if (!name || !text) {
+            alert('Пожалуйста, заполните имя и текст отзыва');
+            return;
+        }
+        
+        if (text.length < 10) {
+            alert('Отзыв должен содержать минимум 10 символов');
+            return;
+        }
+        
+        // Здесь можно добавить отправку на сервер
+        // Пока просто показываем сообщение
+        alert('Спасибо! Ваш отзыв отправлен на модерацию.');
+        
+        // Закрываем модальное окно
+        const modal = bootstrap.Modal.getInstance(feedbackModal);
+        if (modal) modal.hide();
+        
+        // Очищаем форму
+        feedbackForm.reset();
+        
+        // Сбрасываем рейтинг на 5 звёзд
+        document.getElementById('rating5').checked = true;
+    });
+}
+
+// Валидация формы заявки
+function setupApplicationForm() {
+    const applicationForm = document.getElementById('applicationForm');
+    
+    if (!applicationForm) return;
+    
+    applicationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!applicationForm.checkValidity()) {
+            e.stopPropagation();
+        } else {
+            // Получаем данные
+            const name = document.getElementById('appName').value;
+            const phone = document.getElementById('appPhone').value;
+            const email = document.getElementById('appEmail').value;
+            const comment = document.getElementById('appComment').value;
+            const files = document.getElementById('fileInput').files;
             
-            const modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
-            if (modal) modal.hide();
+            // Пока просто показываем сообщение
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 24 часов.');
             
-            alert('Спасибо! Ваш отзыв отправлен на модерацию.');
-            feedbackForm.reset();
-        }, false);
-    }
+            // Очищаем форму
+            applicationForm.reset();
+            document.getElementById('fileList').innerHTML = '';
+        }
+        
+        applicationForm.classList.add('was-validated');
+    }, false);
 }
 
 // Загрузка файлов
@@ -88,18 +128,7 @@ function setupFileUpload() {
             if (e.target.files.length > 0) {
                 for (let i = 0; i < e.target.files.length; i++) {
                     const file = e.target.files[i];
-                    const fileItem = document.createElement('div');
-                    fileItem.className = 'alert alert-info d-flex justify-content-between align-items-center py-2';
-                    fileItem.innerHTML = `
-                        <span><i class="bi bi-file-earmark me-2"></i>${file.name}</span>
-                        <button type="button" class="btn-close btn-close-sm"></button>
-                    `;
-                    
-                    // Удаление файла из списка
-                    fileItem.querySelector('.btn-close').addEventListener('click', function() {
-                        fileItem.remove();
-                    });
-                    
+                    const fileItem = createFileItem(file);
                     fileList.appendChild(fileItem);
                 }
             }
@@ -129,6 +158,51 @@ function setupFileUpload() {
             fileInput.dispatchEvent(event);
         }
     });
+}
+
+// Создание элемента файла для списка
+function createFileItem(file) {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'alert alert-info d-flex justify-content-between align-items-center py-2';
+    fileItem.innerHTML = `
+        <span><i class="bi bi-file-earmark me-2"></i>${file.name}</span>
+        <button type="button" class="btn-close btn-close-sm"></button>
+    `;
+    
+    // Удаление файла из списка
+    fileItem.querySelector('.btn-close').addEventListener('click', function() {
+        fileItem.remove();
+        
+    });
+    
+    return fileItem;
+}
+
+// Обработка загрузки аватара через Google Forms (симуляция)
+function setupAvatarUpload() {
+    const googleFormsLink = document.querySelector('#feedbackForm a[href="https://docs.google.com/forms"]');
+    const avatarInput = document.querySelector('#feedbackForm input[type="text"]');
+    
+    if (googleFormsLink) {
+        // Открываем Google Forms в новом окне
+        googleFormsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(this.href, '_blank', 'width=800,height=600');
+            
+            // Можно показать инструкцию
+            alert('После загрузки фото скопируйте ссылку на изображение и вставьте в поле ниже.');
+        });
+    }
+    
+    if (avatarInput) {
+        // Проверка ссылки на изображение
+        avatarInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && !value.startsWith('http')) {
+                alert('Пожалуйста, введите полную ссылку (начинающуюся с http:// или https://)');
+            }
+        });
+    }
 }
 
 // Плавная прокрутка по якорным ссылкам
@@ -162,17 +236,40 @@ function setupSmoothScroll() {
     });
 }
 
+// Обработка модального окна при открытии/закрытии
+function setupModalHandlers() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    
+    if (!feedbackModal) return;
+    
+    feedbackModal.addEventListener('show.bs.modal', function() {
+        console.log('Модальное окно отзыва открывается');
+    });
+    
+    feedbackModal.addEventListener('hidden.bs.modal', function() {
+        console.log('Модальное окно отзыва закрыто');
+        // Можно сбросить форму при закрытии
+        const form = document.getElementById('feedbackForm');
+        if (form) form.reset();
+    });
+}
+
 // Инициализация всего при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Сайт загружен, инициализируем функции...');
+    
     // Проверка видимости элементов
     checkVisibility();
     window.addEventListener('scroll', checkVisibility);
     
     // Настройка всех функций
     setupBackToTop();
-    setupForms();
+    setupFeedbackForm();      
+    setupApplicationForm();
     setupFileUpload();
+    setupAvatarUpload();      
     setupSmoothScroll();
+    setupModalHandlers();     
     
     // Автозапуск карусели отзывов
     const feedbackCarousel = document.getElementById('feedbackCarousel');
@@ -182,4 +279,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wrap: true
         });
     }
+    
+    console.log('Все функции инициализированы');
 });
